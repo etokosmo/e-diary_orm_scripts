@@ -23,14 +23,63 @@
 
 ## Запуск
 
-- Скачайте код
+- Скачайте scripts.py и Commendations.txt
+- Скачайте [Электронный дневник школы](https://github.com/devmanorg/e-diary/tree/master)
+- Также у вас должна быть база данных под именованием `schoolbase.sqlite3`
+- Поместите скачанные два файла и базу данных в проект электронного дневника в папку рядом с `manage.py`
+- Создайте файл `.env` и пропишите туда переменные окружения как указано в
+  инструкции [здесь](https://github.com/devmanorg/e-diary/tree/master)
+- Через консоль установите виртуальное окружение командой:
 
-- Поместите файлы в папке с `manage.py`
+```bash
+python3 -m venv env
+```
 
-- Импортируйте в `manage.py` нужные функции скрипта
+- Активируйте виртуальное окружение командой:
+
+```bash
+source env/bin/activate
+```
+
+- Установите необходимые библиотеки:
+
+```bash
+pip install -r requirements.txt
+```
+
+- Запустите сервер для проверки электронного дневника командой:
+
+```bash
+python manage.py runserver
+```
+
+- Через другое окно консоли активируйте виртуальное окружение и запустите shell командой:
+
+```bash
+python manage.py shell
+```
+
+- Для исправления всех оценок ученика введите:
 
 ```python
-from scripts import fix_marks  # Принимает на вход экземпляр модели Schoolkid
-from scripts import remove_chastisements  # Принимает на вход экземпляр модели Schoolkid
-from scripts import create_commendation  # Принимает на вход строки с полным именем и название предмета create_commendation('Фролов Иван', 'Музыка')
+from scripts import fix_marks
+
+fix_marks("Полное имя ученика")  # Например fix_marks("Громов Зосима Жанович")
 ```
+
+- Для удаления всех замечаний ученика введите:
+
+```python
+from scripts import remove_chastisements
+
+remove_chastisements("Полное имя ученика")  #Например remove_chastisements("Громов Зосима Жанович")
+```
+
+- Для добавления похвалы по последнему уроку введенного предмета введите:
+
+```python
+from scripts import create_commendation
+
+create_commendation("Полное имя ученика")  # Например create_commendation("Громов Зосима Жанович", "Математика")
+```
+> При возниконовении ошибок следует читать последнюю строчку ошибки.
