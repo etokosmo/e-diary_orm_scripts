@@ -35,7 +35,7 @@ def create_commendation(fullname: str, subject: str):
     child = get_child_from_fullname(fullname)
     lesson = Lesson.objects.filter(year_of_study=child.year_of_study, group_letter=child.group_letter,
                                    subject__title=subject).order_by('date').last()
-    if lesson is None:
+    if not lesson:
         raise IncorrectSubject(f"Неправильно указан предмет. Ваш ввод: {subject}") from None
     Commendation.objects.create(text=random.choice(commendation_phrases), created=lesson.date, schoolkid=child,
                                 subject=lesson.subject, teacher=lesson.teacher)
